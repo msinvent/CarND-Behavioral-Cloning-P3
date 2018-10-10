@@ -195,81 +195,81 @@ model.summary()
 model.compile(loss='mse',optimizer='adam')
 
 
-## In[6]:
-#
-#
-## Train model on dataset
-#
-#model.fit_generator(generator=training_generator,
-#                    validation_data=validation_generator,
-#                    use_multiprocessing=False,
-#                    shuffle = True,
-##                     steps_per_epoch = 100,
-#                    epochs = 8,
-#                    workers=4,
-#                    verbose=2)
-#
-#model.save('model_generators_8E.h5')
-#print('model trained with 8 epochs')
-#
-## In[7]:
-#
-#
-#model.fit_generator(generator=training_generator,
-#                    validation_data=validation_generator,
-#                    use_multiprocessing=False,
-#                    shuffle = True,
-##                     steps_per_epoch = 100,
-#                    epochs = 8,
-#                    workers=4,
-#                    verbose=2)
-#
-#model.save('model_generators_16E.h5')
-#model.save('model.h5')
-#print('model trained with 16 epochs')
-#
-#
-## In[8]:
-#
-#
-#model.fit_generator(generator=training_generator,
-#                    validation_data=validation_generator,
-#                    use_multiprocessing=False,
-#                    shuffle = True,
-##                     steps_per_epoch = 100,
-#                    epochs = 8,
-#                    workers=4,
-#                    verbose=2)
-#
-#model.save('model_generators_24E.h5')
-#print('model trained with 24 epochs')
-#
-## In[9]:
-#
-#
-#model.fit_generator(generator=training_generator,
-#                    validation_data=validation_generator,
-#                    use_multiprocessing=False,
-#                    shuffle = True,
-##                     steps_per_epoch = 100,
-#                    epochs = 8,
-#                    workers=4,
-#                    verbose=2)
-#
-#model.save('model_generators_32E.h5')
-#print('model trained with 32 epochs')
-#
-## In[10]:
-#
-#
-#model.fit_generator(generator=training_generator,
-#                    validation_data=validation_generator,
-#                    use_multiprocessing=False,
-#                    shuffle = True,
-##                     steps_per_epoch = 100,
-#                    epochs = 8,
-#                    workers=1,
-#                    verbose=2)
-#
-#model.save('model_generators_40E.h5')
-#print('model trained with 40 epochs')
+# In[6]:
+
+
+# Train model on dataset
+
+model.fit_generator(generator=training_generator,
+                    validation_data=validation_generator,
+                    use_multiprocessing=False,
+                    shuffle = True,
+#                     steps_per_epoch = 100,
+                    epochs = 8,
+                    workers=4,
+                    verbose=2)
+
+model.save('model_generators_8E.h5')
+print('model trained with 8 epochs')
+
+# In[7]:
+
+
+model.fit_generator(generator=training_generator,
+                    validation_data=validation_generator,
+                    use_multiprocessing=False,
+                    shuffle = True,
+#                     steps_per_epoch = 100,
+                    epochs = 8,
+                    workers=4,
+                    verbose=2)
+
+model.save('model_generators_16E.h5')
+model.save('model.h5')
+print('model trained with 16 epochs')
+
+
+# In[8]:
+
+
+model.fit_generator(generator=training_generator,
+                    validation_data=validation_generator,
+                    use_multiprocessing=False,
+                    shuffle = True,
+#                     steps_per_epoch = 100,
+                    epochs = 8,
+                    workers=4,
+                    verbose=2)
+
+model.save('model_generators_24E.h5')
+print('model trained with 24 epochs')
+
+# In[9]:
+
+
+model.fit_generator(generator=training_generator,
+                    validation_data=validation_generator,
+                    use_multiprocessing=False,
+                    shuffle = True,
+#                     steps_per_epoch = 100,
+                    epochs = 8,
+                    workers=4,
+                    verbose=2)
+
+model.save('model_generators_32E.h5')
+print('model trained with 32 epochs')
+
+# In[10]:
+
+
+model.fit_generator(generator=training_generator,
+                    validation_data=validation_generator,
+                    use_multiprocessing=False,
+                    shuffle = True,
+#                     steps_per_epoch = 100,
+                    epochs = 8,
+                    workers=1,
+                    verbose=2)
+
+model.save('model_generators_40E.h5')
+print('model trained with 40 epochs')
