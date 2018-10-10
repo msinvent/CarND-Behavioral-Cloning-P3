@@ -1,11 +1,17 @@
-
 # coding: utf-8
+'''
+@Programmer : Manish Sharma
+@description : code to train an end to end deep neural network to drive an autonomous vehicle on unity simulator provided by udacity
+Main Section of the codes are :
+    1 - DataGenerator class : inherits from keral.utils.Sequence to allow picking data on the fly to be fed to DNN to overcome ram limitations
+    2 - Deep Neural Network description in keras
+    3 - Deep Neural Network specicifications and training to finally save the model
+'''
 
 # In[1]:
 
 
-import tensorflow as tf
-import csv,cv2, numpy as np
+import cv2, numpy as np
 import pandas as pd
 
 
@@ -14,10 +20,14 @@ import pandas as pd
 
 # https://stanford.edu/~shervine/blog/keras-how-to-generate-data-on-the-fly
 # https://github.com/shervinea/enzynet
-import numpy as np
 import keras
-import matplotlib.pyplot as plt
 
+'''
+@DataGenerator class written to modify the keral standard DataGenerator, I found this approach extremely streamlined and clean.
+Class randomize the input sample and reads only specified number of image samples in memory to feed. This class supports multiprocessing
+but requires careful calculation because you may wind up overloading your RAM if your batch size and number of processors is large.
+Thanks to Safeer Afaque for this recommendation over the use of yield
+'''
 class DataGenerator(keras.utils.Sequence):
     'Generates data for Keras'
     def __init__(self, list_IDs, labels, batch_size=32, dim=(32,32,32), shuffle=False, objectName = 'defaultName', **params):
@@ -102,14 +112,16 @@ class DataGenerator(keras.utils.Sequence):
 
 
 # In[3]:
+'''
+@Declarions of DataGenerator objects for training_generator and validation_generator, sklearn train_test_split is used to separate training and
+validation dataset
+'''
 
-
-import numpy as np
 from sklearn.model_selection import train_test_split
 
 # Parameters
 params = {'dim': (160,320,3),
-          'batch_size': 128,
+          'batch_size': 32,
           'shuffle': True,
           'relativeLocation':'../assignment_3/data_downloaded/data/'}
 
@@ -136,18 +148,18 @@ XX, yy = validation_generator.__getitem__(0)
 
 
 # In[4]:
-
-
-# '''
-# Keral library imports
-# '''
+'''
+Keral library imports
+'''
 from keras.models import Sequential
-from keras.layers import Flatten, Dense, Activation, Lambda, Cropping2D
+from keras.layers import Flatten, Dense, Lambda, Cropping2D
 from keras.layers import Conv2D, MaxPooling2D, Dropout
 
 
 # In[5]:
-
+'''
+Keral model description
+'''
 
 # ch, row, col = 3, 80, 320  # Trimmed image format
 model = Sequential()
@@ -176,24 +188,11 @@ model.add(Dropout(0.25))
 
 model.add(Dense(1))
 
+# printing the model description to take a snapshot and print it to the project
 model.summary()
 
 # # Network optimization choices set to mse and adam optimizer
 model.compile(loss='mse',optimizer='adam')
-          
-# # Network training happening here
-# # model..fit_generator(train_generator, samples_per_epoch=len(train_samples), validation_data=validation_generator,
-# #                     nb_val_samples=len(validation_samples), epochs=3)
-# # model.fit_generator(train_generator, steps_per_epoch= len(train_samples),
-# # validation_data=validation_generator, validation_steps=len(validation_samples), epochs=5, verbose = 1)
-
-# # model.save('model_3A.h5')
-
-
-# # Design model
-# model = Sequential()
-# [...] # Architecture
-# model.compile()
 
 
 # In[6]:
@@ -210,8 +209,8 @@ model.fit_generator(generator=training_generator,
                     workers=4,
                     verbose=2)
 
-model.save('model_generators_8D.h5')
-
+model.save('model_generators_8E.h5')
+print('model trained with 8 epochs')
 
 # In[7]:
 
@@ -225,7 +224,9 @@ model.fit_generator(generator=training_generator,
                     workers=4,
                     verbose=2)
 
-model.save('model_generators_16D.h5')
+model.save('model_generators_16E.h5')
+model.save('model.h5')
+print('model trained with 16 epochs')
 
 
 # In[8]:
@@ -240,8 +241,8 @@ model.fit_generator(generator=training_generator,
                     workers=4,
                     verbose=2)
 
-model.save('model_generators_24D.h5')
-
+model.save('model_generators_24E.h5')
+print('model trained with 24 epochs')
 
 # In[9]:
 
@@ -255,8 +256,8 @@ model.fit_generator(generator=training_generator,
                     workers=4,
                     verbose=2)
 
-model.save('model_generators_32D.h5')
-
+model.save('model_generators_32E.h5')
+print('model trained with 32 epochs')
 
 # In[10]:
 
@@ -267,8 +268,8 @@ model.fit_generator(generator=training_generator,
                     shuffle = True,
 #                     steps_per_epoch = 100,
                     epochs = 8,
-                    workers=4,
+                    workers=1,
                     verbose=2)
 
-model.save('model_generators_40D.h5')
-
+model.save('model_generators_40E.h5')
+print('model trained with 40 epochs')
